@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.2.1-SNAPSHOT</version>
+		<version>2.3.5.RELEASE</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.bcnc.rick.morty</groupId>
@@ -14,7 +14,7 @@
 	<name>Rick &amp; Morty API consumer</name>
 	<description>Application to consume Rick &amp; Morty APIs</description>
 	<properties>
-		<java.version>17</java.version>
+		<java.version>8</java.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -22,12 +22,6 @@
 			<artifactId>spring-boot-starter-webflux</artifactId>
 		</dependency>
 
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-docker-compose</artifactId>
-			<scope>runtime</scope>
-			<optional>true</optional>
-		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
@@ -42,6 +36,16 @@
 			<groupId>net.adrianoluis</groupId>
 			<artifactId>rickandmortyapi-java</artifactId>
 			<version>1.1.1</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.ws.rs</groupId>
+			<artifactId>javax.ws.rs-api</artifactId>
+			<version>2.1.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.glassfish.jersey.core</groupId>
+			<artifactId>jersey-client</artifactId>
+			<version>3.1.3</version>
 		</dependency>
 	</dependencies>
 
