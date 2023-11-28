@@ -14,11 +14,14 @@ public class RMConsumerService {
 
     private RMCharacterService rmCharacterService;
     private RMEpisodeService rmEpisodeService;
+    private RMLocationService rmLocationService;
 
     @Autowired
-    public RMConsumerService(RMCharacterService rmCharacterService, RMEpisodeService rmEpisodeService) {
+    public RMConsumerService(RMCharacterService rmCharacterService, RMEpisodeService rmEpisodeService,
+                             RMLocationService rmLocationService) {
         this.rmCharacterService = rmCharacterService;
         this.rmEpisodeService = rmEpisodeService;
+        this.rmLocationService = rmLocationService;
     }
 
     public JsonArray getCharacterForConsumerByName(String name) {
@@ -36,7 +39,7 @@ public class RMConsumerService {
                 episodeArray.add(episode.getName());
             }
             characterJsonObject.add("episodes",episodeArray);
-            Location location = character.getOriginLocation();
+            Location location = rmLocationService.getLocationByIds(character.getOriginLocation().getId())[0];
             characterJsonObject.addProperty("first_appearance",
                     location.getCreated().format(DateTimeFormatter.ISO_LOCAL_DATE_TIME));
             characterJsonArray.add(characterJsonObject);
