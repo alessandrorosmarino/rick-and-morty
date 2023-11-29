@@ -12,6 +12,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/***
+ * This class is the service layer of the application.
+ * Its pourpose is to receive the request from the controller, fetch all the data necessary
+ * from the various services, build the correct Object to respond and return it to the controller.
+ */
 @Service
 public class RMConsumerService {
 
