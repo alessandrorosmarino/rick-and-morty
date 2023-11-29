@@ -9,6 +9,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+/***
+ * This class is the controller of the application.
+ * Its pourpose is to receive the request from the client ,send it to the service layer and
+ * return the response to the client accordingly.
+ */
 @RestController
 public class RMController {
 
