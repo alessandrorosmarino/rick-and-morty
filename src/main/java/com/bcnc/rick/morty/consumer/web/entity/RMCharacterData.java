@@ -1,5 +1,7 @@
 package com.bcnc.rick.morty.consumer.web.entity;
 
+import java.util.Arrays;
+
 /***
  * This Object has been created to store the data from the API
  * as the Rick and Morty API don't provide an object with such
@@ -33,5 +35,14 @@ public class RMCharacterData {
 
     public void setFirstAppearance(String firstAppearance) {
         this.firstAppearance = firstAppearance;
+    }
+
+    @Override
+    public String toString() {
+        return "RMCharacterData{" +
+                "name='" + name + '\'' +
+                ", episodes=" + Arrays.toString(episodes) +
+                ", firstAppearance='" + firstAppearance + '\'' +
+                '}';
     }
 }
