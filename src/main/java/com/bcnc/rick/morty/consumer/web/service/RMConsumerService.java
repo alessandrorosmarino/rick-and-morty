@@ -35,20 +35,33 @@ public class RMConsumerService {
     public List<RMCharacterData> getCharacterForConsumerByName(String name) {
         List<RMCharacterData> rmCharacterDataList = new ArrayList<>();
         Character[] characters = rmCharacterService.getCharacterByName(name);
+        if(characters.length == 0){
+            return rmCharacterDataList;
+        }
         for (Character character : characters) {
             RMCharacterData rmCharacterData = new RMCharacterData();
             rmCharacterData.setName(character.getName());
-            Integer[] episodeIds = character.getEpisodes().stream().map(
-                    Episode::getId
-            ).toArray(Integer[]::new);
-            Episode[] episodes = rmEpisodeService.getEpisodesByIds(episodeIds);
-            rmCharacterData.setEpisodes(Arrays.stream(episodes).map(
-                    Episode::getName
-            ).toArray(String[]::new));
-            Location location = rmLocationService.getLocationById(character.getOriginLocation().getId());
-            rmCharacterData.setFirstAppearance(
-                    location.getCreated().format(DateTimeFormatter.ISO_LOCAL_DATE));
-            rmCharacterDataList.add(rmCharacterData);
+            List<Episode> episodeList = character.getEpisodes();
+            if(!episodeList.isEmpty()){
+                Integer[] episodeIds = episodeList.stream().map(
+                        Episode::getId
+                ).filter(
+                        (id) -> id > -1
+                ).toArray(Integer[]::new);
+                if(episodeIds.length > 0){
+                    Episode[] episodes = rmEpisodeService.getEpisodesByIds(episodeIds);
+                    rmCharacterData.setEpisodes(Arrays.stream(episodes).map(
+                            Episode::getName
+                    ).toArray(String[]::new));
+                }
+            }
+            Integer locationId = character.getOriginLocation().getId();
+            if(locationId > -1){
+                Location location = rmLocationService.getLocationById(locationId);
+                rmCharacterData.setFirstAppearance(
+                        location.getCreated().format(DateTimeFormatter.ISO_LOCAL_DATE));
+                rmCharacterDataList.add(rmCharacterData);
+            }
         }
         return rmCharacterDataList;
     }
