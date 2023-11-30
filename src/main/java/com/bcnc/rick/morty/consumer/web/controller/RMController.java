@@ -1,5 +1,6 @@
 package com.bcnc.rick.morty.consumer.web.controller;
 
+import com.bcnc.rick.morty.consumer.exception.NoRMCharacterFoundException;
 import com.bcnc.rick.morty.consumer.web.entity.RMCharacterData;
 import com.bcnc.rick.morty.consumer.web.service.RMConsumerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,10 @@ public class RMController {
 
     @GetMapping("/search-character-appearance")
     public List<RMCharacterData> getRickAndMorty(@RequestParam(name = "name") String name) {
-        return rmConsumerService.getCharacterForConsumerByName(name);
+        List<RMCharacterData> rmCharacterDataList = rmConsumerService.getCharacterForConsumerByName(name);
+        if (rmCharacterDataList.isEmpty()) {
+            throw new NoRMCharacterFoundException("No character found with name: " + name);
+        }
+        return rmCharacterDataList;
     }
 }
