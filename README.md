@@ -34,10 +34,9 @@ with the Rick & Morty Java Client.
 Not everything could be done in the time given.
 The following is a list of things that could be done
 to improve the application:
-* Add more tests
 * Document the Application further
-* Add some Error Handling
 * Check performance of the application and improve it
+* Check test coverage and improve it
 
 ### Technology choices
 
